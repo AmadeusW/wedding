@@ -1,6 +1,9 @@
 body {
     background: #fefeff;
     color: #333;
+    font-family: 'Slabo 27px', serif;
+    line-height: 150%;
+    text-align: center;
 }
 
 section {
@@ -12,7 +15,18 @@ section {
 }
 
 h1, h2, h3, h4, h5 {
-    text-align: center;
+    text-align: center; /* redundant if we make all text centered */
+}
+
+h1 {
+    font-family: 'Alex Brush', cursive;
+    font-size: 4em;
+}
+
+h2 {
+    font-family: 'Alex Brush', cursive;
+    color: #555;
+    font-size: 3em;
 }
 
 /* Portrait and Landscape */
