@@ -10,6 +10,14 @@
       "type": "http",
       "direction": "out",
       "name": "$return"
+    },
+    {
+      "type": "table",
+      "name": "weddingTable",
+      "tableName": "wedweb",
+      "partitionKey": "guest",
+      "connection": "amadeuswstorage_STORAGE",
+      "direction": "in"
     }
   ],
   "disabled": false
