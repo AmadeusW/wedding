@@ -1,8 +1,22 @@
 #WedWeb
 
 ## To Do
-[] - client: display RSVP section and buttons based on params.
-[] - client: ask server for current RSVP status and update the UI
-[] - server: report status of RSVP (read from Azure Table)
-[] - server: update status of RSVP (write to Azure Table)
-[] - server: sync between Azure Table and Google Sheets (use Javascript for this)
+
+- **User loads page**
+- [ ] Make a request for rsvp status
+- [ ] update the UI
+- [ ] server: report status of RSVP (read from Azure Table)
+
+- [ ] All actions write to log table 
+- [ ] and verify credentials (guid)
+
+- **User sends response**
+- [ ] Make a request with status and user id
+- [ ] server: update status of RSVP (write to Azure Table)
+- [ ] Acknowledge
+
+- **sync between Azure Table and Google Sheets**
+- [ ] Create sample data
+- [ ] Pull from Google sheets
+- [ ] Push to Google sheets
+- [ ] Handle conflicts 
