@@ -10,6 +10,13 @@
       "type": "http",
       "direction": "out",
       "name": "$return"
+    },
+    {
+      "name": "weddingTable",
+      "type": "table",
+      "tableName": "wedweb",
+      "connection": "amadeuswstorage_STORAGE",
+      "direction": "in"
     }
   ],
   "disabled": false
