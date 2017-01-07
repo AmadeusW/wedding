@@ -29,12 +29,34 @@ h2 {
 }
 
 /* Portrait and Landscape */
-@media only screen 
-  and (max-device-width: 736px)  { 
-      section {
-          max-width: 98%;
-      }
+@media only screen
+  and (max-width: 736px)  {
+    section {
+        max-width: 98%;
+    }
+    .rsvpbuttons {
+        width: 100%;
+    }
+
+    #rsvp input {
+        width: 100%;
+    }
 }
+/* Portrait and Landscape */
+@media only screen
+  and (max-width: 736%)  {
+    section {
+        max-width: 90%;
+    }
+    .rsvpbuttons {
+        width: 90%;
+    }
+
+    #rsvp input {
+        width: 90%;
+    }
+}
+
 
 #rsvp {
     background: #faffff;
@@ -56,10 +78,15 @@ h2 {
 
 .rsvpbuttons button {
     flex-grow: 1;
-    margin: 1em;
+    margin: 2%;
     height: 3em;
     font-family: 'Slabo 27px', serif;
     font-size: 1em;
+}
+
+#rsvp input {
+    width: 45%;
+    height: 2.6em;
 }
 
 .maparea {
