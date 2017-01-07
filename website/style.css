@@ -1,5 +1,5 @@
 body {
-    background: #fefeff;
+    background: #f9f9f6;
     color: #333;
     font-family: 'Slabo 27px', serif;
     line-height: 150%;
@@ -7,11 +7,11 @@ body {
 }
 
 section {
-    border: solid #f8f8ed;
-    border-width: 1px 3px 3px 1px;
-    max-width: 80%;
+    border: solid #f6f6ea;
+    border-width: 0px 3px 0px 1px;
+    max-width: 70%;
     margin: 0 auto;
-    padding: 2em;
+    padding: 2em 2em 6em 2em;
 }
 
 h1, h2, h3, h4, h5 {
@@ -19,12 +19,11 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    font-family: 'Alex Brush', cursive;
+    font-family: 'Alex Brush', cursive;    
     font-size: 4em;
 }
 
 h2 {
-    font-family: 'Alex Brush', cursive;
     color: #555;
     font-size: 3em;
 }
@@ -39,17 +38,14 @@ h2 {
 
 #rsvp {
     background: #faffff;
-    margin-bottom: 4em;
 }
 
 #map {
     background: #fcfffc;
-    margin-bottom: 4em;
 }
 
 #photos {
     background: #fffcfc;
-    margin-bottom: 4em;
 }
 
 .rsvpbuttons {
