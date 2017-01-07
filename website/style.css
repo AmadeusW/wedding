@@ -25,7 +25,17 @@ h1 {
 
 h2 {
     color: #555;
-    font-size: 3em;
+    font-size: 2.7em;
+}
+
+h3 {
+    color: #555;
+    font-size: 2.0em;
+}
+
+h4 {
+    color: #555;
+    font-size: 1em;
 }
 
 /* Portrait and Landscape */
@@ -103,4 +113,14 @@ h2 {
     border: 0;
     max-width:100%;
     max-height:100%;
+}
+
+a, a:visited {
+    color: #555;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #339;
+    text-decoration: underline;
 }
