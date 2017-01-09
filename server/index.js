@@ -15,25 +15,47 @@ app.get('/status', function (req, res) {
   var azure = require('azure-storage');
   var tables = azure.createTableService();
 
-  tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, result, response) {
-    if (!error) {
-      res.setHeader('Content-Type', 'application/json');
-      res.json({
-        name: result.Name._,
-        response: result.Response._,
-        music: result.Music._,
-        food: result.Food._
-      });
+  tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, entity) {
+    if (error) {
+      logAndReturnError(error);
+      return;
     }
-    else {
-      console.log(JSON.stringify(error));
-      res.json({status: "error"});
-    }
+    res.json({
+      name: entity.Name ? entity.Name._ : "invalid",
+      response: entity.Response ? entity.Response._ : "-1",
+      music: entity.Music ? entity.Music._ : "",
+      food: entity.Food ? entity.Food._ : ""
+    });
   });
 })
 
 app.get('/respond', function (req, res) {
-  res.send("respond");
+  if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined)
+    res.status(err.status || 400);
+  console.log("respond: " + req.query.name + " ("+req.query.magic+")")
+  var azure = require('azure-storage');
+  var tables = azure.createTableService();
+
+  tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, entity) {
+    if (error) {
+      logAndReturnError(error);
+      return;
+    }
+
+    entity.Response = req.query.response;
+    entity.Food = req.query.food;
+    entity.Music = req.query.music;
+
+    tables.replaceEntity('wedweb', entity, function(error) {
+      if (error) {
+        logAndReturnError(error);
+        return;
+      }
+      res.json({
+        response: entity
+      });
+    });
+  });
 })
 
 /// catch 404 and forward to error handler
@@ -63,3 +85,9 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(3000)
+
+
+function logAndReturnError(error) {
+  console.log(JSON.stringify(error));
+  res.json({status: "error"});
+}

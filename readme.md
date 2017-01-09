@@ -12,7 +12,7 @@
 
 - **User sends response**
 - [ ] Make a request with status and user id
-- [ ] server: update status of RSVP (write to Azure Table)
+- [X] server: update status of RSVP (write to Azure Table)
 - [ ] Acknowledge
 
 - **sync between Azure Table and Google Sheets**
