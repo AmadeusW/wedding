@@ -9,15 +9,17 @@ app.get('/', function (req, res) {
 })
 
 app.get('/status', function (req, res) {
-  if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined)
-    res.status(err.status || 400);
+  if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined) {
+    res.sendStatus(400);
+    return;
+  }
   console.log("status: " + req.query.name + " ("+req.query.magic+")")
   var azure = require('azure-storage');
   var tables = azure.createTableService();
 
   tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, entity) {
     if (error) {
-      logAndReturnError(error);
+      handleError(res, error, error.statusCode || 404);
       return;
     }
     res.json({
@@ -30,15 +32,17 @@ app.get('/status', function (req, res) {
 })
 
 app.get('/respond', function (req, res) {
-  if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined)
-    res.status(err.status || 400);
+  if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined) {
+    res.sendStatus(400);
+    return;
+  }
   console.log("respond: " + req.query.name + " ("+req.query.magic+")")
   var azure = require('azure-storage');
   var tables = azure.createTableService();
 
   tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, entity) {
     if (error) {
-      logAndReturnError(error);
+      handleError(res, error, error.statusCode || 404);
       return;
     }
 
@@ -48,7 +52,7 @@ app.get('/respond', function (req, res) {
 
     tables.replaceEntity('wedweb', entity, function(error) {
       if (error) {
-        logAndReturnError(error);
+        handleError(res, error, error.statusCode || 500);
         return;
       }
       res.json({
@@ -87,7 +91,7 @@ app.use(function(err, req, res, next) {
 app.listen(3000)
 
 
-function logAndReturnError(error) {
+function handleError(res, error, status) {
   console.log(JSON.stringify(error));
-  res.json({status: "error"});
+  res.sendStatus(status);
 }
