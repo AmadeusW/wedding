@@ -14,7 +14,7 @@ app.get('/status', function (req, res) {
   console.log("Welcome " + req.query.name + "("+req.query.magic+")")
 
   var azure = require('azure-storage');
-  var tables = azure.createTableService('amadeuswstorage', 'HhL2p6dLt2oNNmRRLy1N5aV2zUKuM7ncrAIV7xWPpRQZmITUKaxQPiPIc8aD4XCwpVBUEtjNuFxl');
+  var tables = azure.createTableService();
   console.log(JSON.stringify(tables));
   var x = process.env.AZURE_STORAGE_CONNECTION_STRING;
   console.log(x);
