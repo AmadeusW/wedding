@@ -16,6 +16,7 @@ function go() {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
         var entity = JSON.parse(xhr.responseText);
+        document.getElementById("rsvp-name").innerHTML = entity.name;
         document.getElementById("rsvp-music").value = entity.music;
         document.getElementById("rsvp-food").value = entity.food;
       } else {
