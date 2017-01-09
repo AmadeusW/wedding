@@ -67,9 +67,13 @@ h4 {
     }
 }
 
-
 #rsvp {
     background: #faffff;
+    display: none;
+}
+
+#rsvp.visible {
+    display: block;
 }
 
 #map {
