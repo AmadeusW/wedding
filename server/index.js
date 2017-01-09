@@ -12,14 +12,26 @@ app.get('/status', function (req, res) {
   if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined)
     res.status(err.status || 400);
   console.log("Welcome " + req.query.name + "("+req.query.magic+")")
-/*  
+
   var azure = require('azure-storage');
-  var ts = azure.createTableService();
-  console.log(JSON.stringify(ts));
-  var guest = ts.retrieveEntity('wedweb', 'guest', req.query.magic)
-  console.log(JSON.stringify(guest));
-*/
-  res.send("Welcome " + req.query.name + "("+req.query.magic+")");
+  var tables = azure.createTableService('amadeuswstorage', 'HhL2p6dLt2oNNmRRLy1N5aV2zUKuM7ncrAIV7xWPpRQZmITUKaxQPiPIc8aD4XCwpVBUEtjNuFxl');
+  console.log(JSON.stringify(tables));
+  var x = process.env.AZURE_STORAGE_CONNECTION_STRING;
+  console.log(x);
+  tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, result, response) {
+    if (!error) {
+      console.log(JSON.stringify(result));
+      console.log(JSON.stringify(response));
+      res.send("Welcome " + req.query.name + "("+req.query.magic+"). We have your data!");
+    }
+    else {
+      console.log(JSON.stringify(error));
+      console.log(JSON.stringify(result));
+      console.log(JSON.stringify(response));
+      res.send("Welcome " + req.query.name + "("+req.query.magic+"). Error: " + error);
+    }
+  });
+
 })
 
 app.get('/respond', function (req, res) {
@@ -33,7 +45,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-/// error handlers
+/// error handlers. TODO: Fix them. they don't seem to work.
 
 // development error handler
 // will print stacktrace
