@@ -12,23 +12,27 @@ app.get('/status', function (req, res) {
   if (req.query === undefined || req.query.name === undefined || req.query.magic === undefined)
     res.status(err.status || 400);
   console.log("Welcome " + req.query.name + "("+req.query.magic+")")
-
   var azure = require('azure-storage');
   var tables = azure.createTableService();
   console.log(JSON.stringify(tables));
-  var x = process.env.AZURE_STORAGE_CONNECTION_STRING;
-  console.log(x);
+
   tables.retrieveEntity('wedweb', 'guest', req.query.magic, function(error, result, response) {
     if (!error) {
       console.log(JSON.stringify(result));
       console.log(JSON.stringify(response));
-      res.send("Welcome " + req.query.name + "("+req.query.magic+"). We have your data!");
+      res.setHeader('Content-Type', 'application/json');
+      res.json({
+        name: result.Name._,
+        response: result.Response._,
+        music: result.Music._,
+        food: result.Food._
+      });
     }
     else {
       console.log(JSON.stringify(error));
       console.log(JSON.stringify(result));
       console.log(JSON.stringify(response));
-      res.send("Welcome " + req.query.name + "("+req.query.magic+"). Error: " + error);
+      res.json({status: "error"});
     }
   });
 

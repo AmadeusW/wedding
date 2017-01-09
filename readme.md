@@ -3,9 +3,9 @@
 ## To Do
 
 - **User loads page**
-- [ ] Make a request for rsvp status
-- [ ] update the UI
-- [ ] server: report status of RSVP (read from Azure Table)
+- [x] Make a request for rsvp status
+- [x] update the UI
+- [x] server: report status of RSVP (read from Azure Table)
 
 - [ ] All actions write to log table 
 - [ ] and verify credentials (guid)
