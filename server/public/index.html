@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Amadeusz &amp; Bianca are GETTING MARRIED!</title>
     <link rel="stylesheet" href="style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Slabo+27px" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.png">
   </head>
@@ -13,11 +17,11 @@
     <section id="rsvp">
         <h2>Dear <span id="rsvp-name">script kiddie</span>,</h2>
         <h4>we'd like to invite you to our wedding celebration!</h4>
-        <h3>RSVP</h3>
+        <h3>RSVP<span id="rsvp-status"></span></h3>
         <div class="rsvpbuttons">
-            <button>I'm coming</button>
-            <button>Yes with +1</button>
-            <button>No</button>
+            <button id="rsvp-yes">I'm coming</button>
+            <button id="rsvp-plusone">Yes with +1</button>
+            <button id="rsvp-no">No</button>
         </div>
 
         <p>Would you like to request a song?</p>
