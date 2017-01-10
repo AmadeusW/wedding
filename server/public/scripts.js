@@ -8,9 +8,11 @@ if (Name !== "" && Magic !== "") {
 }
 
 function go() {
-  $("#rsvp-yes").on( "click", respondYes);
-  $("#rsvp-one").on( "click", respondOne);
-  $("#rsvp-no" ).on( "click", respondNo);
+  $("#rsvp-yes").on("click", respondYes);
+  $("#rsvp-one").on("click", respondOne);
+  $("#rsvp-no" ).on("click", respondNo);
+  $('#rsvp-music').on("input", updateText);
+  $('#rsvp-food').on("input", updateText);
   $("#rsvp-name").html(Name);
   $("#rsvp").addClass("visible");
   $( "#rsvp-status" ).html( "..." );
@@ -31,18 +33,27 @@ function go() {
 
 function respondYes() {
   Response = "yes";
+  clearTimeout($.data(this, 'timer'));
   updateButtons();
   respond();
 }
 function respondOne() {
   Response = "one";
+  clearTimeout($.data(this, 'timer'));
   updateButtons();
   respond();
 }
 function respondNo() {
   Response = "no";
+  clearTimeout($.data(this, 'timer'));
   updateButtons();
   respond();
+}
+function updateText() {
+  clearTimeout($.data(this, 'timer'));
+  $( "#rsvp-status" ).html( "... ");
+  var wait = setTimeout(respond, 1000);
+  $(this).data('timer', wait);
 }
 
 function respond() {
