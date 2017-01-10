@@ -1,9 +1,9 @@
 // On load, check query parameters
-var name = getUrlParameter("name");
-var magic = getUrlParameter("magic");
-var response = "";
+var Name = getUrlParameter("name");
+var Magic = getUrlParameter("magic");
+var Response = "";
 
-if (name !== "" && magic !== "") {
+if (Name !== "" && Magic !== "") {
   go();
 }
 
@@ -11,18 +11,18 @@ function go() {
   $("#rsvp-yes").on( "click", respondYes);
   $("#rsvp-one").on( "click", respondOne);
   $("#rsvp-no" ).on( "click", respondNo);
-  document.getElementById("rsvp-name").innerHTML = name;
-  document.getElementById("rsvp").className = "visible";
+  $("#rsvp-name").html(Name);
+  $("#rsvp").addClass("visible");
   $( "#rsvp-status" ).html( "..." );
   $.ajax({
     url: "/status",
     data: {
-      name: name,
-      magic: magic
+      name: Name,
+      magic: Magic
     },
     success: handleStatus,
     error: function(jqHXR, errorStatus, errorThrown) {
-      document.getElementById("rsvp").className = ""; // hide this section
+      $("rsvp").removeClass("visible");
       console.error(jqHXR);
       console.error(errorThrown);
     }
@@ -30,34 +30,35 @@ function go() {
 }
 
 function respondYes() {
-  response = "yes";
+  Response = "yes";
   updateButtons();
   respond();
 }
 function respondOne() {
-  response = "one";
+  Response = "one";
   updateButtons();
   respond();
 }
 function respondNo() {
-  response = "no";
+  Response = "no";
   updateButtons();
   respond();
 }
 
 function respond() {
-  console.log("Responding...")
+  var data = {
+    name: Name,
+    magic: Magic,
+    response: Response ? Response : "",
+    food: $("#rsvp-food").val() ? $("#rsvp-food").val() : "",
+    music: $("#rsvp-music").val() ? $("#rsvp-music").val() : "" 
+  };
+  console.debug("Responding with: " + JSON.stringify(data))
   $.ajax({
     url: "/respond",
-    data: {
-      name: name,
-      magic: magic,
-      response: response,
-      food: $("#rsvp-food").value,
-      music: $("#rsvp-music").value
-    },
+    data: data,
     success: function( result ) {
-      console.log(result.response);
+      console.debug("Received: " + JSON.stringify(result.response));
       $( "#rsvp-status" ).html( "'ed ");
     },
     error: function(jqHXR, errorStatus, errorThrown) {
@@ -69,11 +70,12 @@ function respond() {
 }
 
 function handleStatus (result) {
-  $("#rsvp-name").innerHTML = result.name;
-  $("#rsvp-music").value = result.music;
-  $("#rsvp-food").value = result.food;
-  response = result.response;
-  if (response == "") {
+  console.debug("Status: " + JSON.stringify(result));
+  $("#rsvp-name").html(result.name);
+  $("#rsvp-music").val(result.music);
+  $("#rsvp-food").val(result.food);
+  Response = result.response;
+  if (Response == "") {
     $("#rsvp-status" ).html("");
   } else {
     $("#rsvp-status").html( "'ed" );
@@ -82,7 +84,7 @@ function handleStatus (result) {
 }
 
 function updateButtons() {
-  switch (response) {
+  switch (Response) {
     case "yes":
       $("#rsvp-yes").addClass("selected");
       $("#rsvp-one").removeClass("selected");

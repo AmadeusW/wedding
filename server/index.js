@@ -24,7 +24,7 @@ app.get('/status', function (req, res) {
     }
     res.json({
       name: entity.Name ? entity.Name._ : "invalid",
-      response: entity.Response ? entity.Response._ : "-1",
+      response: entity.Response ? entity.Response._ : "",
       music: entity.Music ? entity.Music._ : "",
       food: entity.Food ? entity.Food._ : ""
     });
