@@ -53,6 +53,7 @@ function respond() {
     food: $("#rsvp-food").val() ? $("#rsvp-food").val() : "",
     music: $("#rsvp-music").val() ? $("#rsvp-music").val() : "" 
   };
+  $("#rsvp-status").html("ing");
   console.debug("Responding with: " + JSON.stringify(data))
   $.ajax({
     url: "/respond",
