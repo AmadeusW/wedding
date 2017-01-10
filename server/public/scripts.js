@@ -1,8 +1,48 @@
 // On load, check query parameters
 var name = getUrlParameter("name");
 var magic = getUrlParameter("magic");
+var response = "";
+
 if (name !== "" && magic !== "") {
   go();
+}
+
+function go() {
+  $("#rsvp-yes").on( "click", respondYes);
+  $("#rsvp-one").on( "click", respondOne);
+  $("#rsvp-no" ).on( "click", respondNo);
+  document.getElementById("rsvp-name").innerHTML = name;
+  document.getElementById("rsvp").className = "visible";
+  $( "#rsvp-status" ).html( "..." );
+  $.ajax({
+    url: "/status",
+    data: {
+      name: name,
+      magic: magic
+    },
+    success: handleStatus,
+    error: function(jqHXR, errorStatus, errorThrown) {
+      document.getElementById("rsvp").className = ""; // hide this section
+      console.error(jqHXR);
+      console.error(errorThrown);
+    }
+  });
+}
+
+function respondYes() {
+  response = "yes";
+  updateButtons();
+  respond();
+}
+function respondOne() {
+  response = "one";
+  updateButtons();
+  respond();
+}
+function respondNo() {
+  response = "no";
+  updateButtons();
+  respond();
 }
 
 function respond() {
@@ -11,7 +51,10 @@ function respond() {
     url: "/respond",
     data: {
       name: name,
-      magic: magic
+      magic: magic,
+      response: response,
+      food: $("#rsvp-food").value,
+      music: $("#rsvp-music").value
     },
     success: function( result ) {
       console.log(result.response);
@@ -25,38 +68,39 @@ function respond() {
   });
 }
 
-// Event handlers for inputs
-$( "#rsvp-yes" ).on( "click", respond);
-$( "#rsvp-plusone" ).on( "click", respond);
-$( "#rsvp-no" ).on( "click", respond);
+function handleStatus (result) {
+  $("#rsvp-name").innerHTML = result.name;
+  $("#rsvp-music").value = result.music;
+  $("#rsvp-food").value = result.food;
+  response = result.response;
+  if (response == "") {
+    $("#rsvp-status" ).html("");
+  } else {
+    $("#rsvp-status").html( "'ed" );
+    updateButtons();
+  }
+}
 
-function go() {
-  document.getElementById("rsvp-name").innerHTML = name;
-  document.getElementById("rsvp").className = "visible";
-  $( "#rsvp-status" ).html( "..." );
-  $.ajax({
-    url: "/status",
-    data: {
-      name: name,
-      magic: magic
-    },
-    success: function( result ) {
-        document.getElementById("rsvp-name").innerHTML = result.name;
-        document.getElementById("rsvp-music").value = result.music;
-        document.getElementById("rsvp-food").value = result.food;
-        if (result.response !== "-1") {
-          $( "#rsvp-status" ).html( "'ed" );
-        }
-        else {
-          $( "#rsvp-status" ).html( "" );
-        }
-    },
-    error: function(jqHXR, errorStatus, errorThrown) {
-      document.getElementById("rsvp").className = ""; // hide this section
-      console.error(jqHXR);
-      console.error(errorThrown);
-    }
-  });
+function updateButtons() {
+  switch (response) {
+    case "yes":
+      $("#rsvp-yes").addClass("selected");
+      $("#rsvp-one").removeClass("selected");
+      $("#rsvp-no").removeClass("selected");
+      break;
+    case "one":
+      $("#rsvp-status").html( "'ed" );
+      $("#rsvp-yes").removeClass("selected");
+      $("#rsvp-one").addClass("selected");
+      $("#rsvp-no").removeClass("selected");
+      break;
+    case "no":
+      $("#rsvp-status").html( "'ed" );
+      $("#rsvp-yes").removeClass("selected");
+      $("#rsvp-one").removeClass("selected");
+      $("#rsvp-no").addClass("selected");
+      break;
+  }
 }
 
 function getUrlParameter(name) {
