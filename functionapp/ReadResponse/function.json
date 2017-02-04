@@ -16,7 +16,9 @@
       "type": "table",
       "tableName": "wedweb",
       "connection": "amadeuswstorage_STORAGE",
-      "direction": "in"
+      "direction": "in",
+      "partitionKey" : "guest",
+      "rowKey": "{magic}"
     }
   ],
   "disabled": false

@@ -1,18 +1,24 @@
 module.exports = function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
+    context.log('Request: ' + JSON.stringify(req));
+    // TODO: see what happens when magic is gone
+    var data = context.bindings.weddingTable;
 
-    var table = context.bindings.weddingTable;
-    context.log(table);
-    if (req.query.name || (req.body && req.body.name)) {
+    if (data) {
+        var data = {
+            name: data.Name ? data.Name : "invalid",
+            response: data.Response ? data.Response : "",
+            music: data.Music ? data.Music : "",
+            food: data.Food ? data.Food : ""
+        }
         res = {
             // status: 200, /* Defaults to 200 */
-            body: "Hello " + (req.query.name || req.body.name)
+            body: data
         };
     }
     else {
         res = {
             status: 400,
-            body: "Please pass a name on the query string or in the request body"
+            body: "Error"
         };
     }
     context.done(null, res);
