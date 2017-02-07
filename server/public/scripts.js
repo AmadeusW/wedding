@@ -11,11 +11,19 @@ function go() {
   $("#rsvp-yes").on("click", respondYes);
   $("#rsvp-one").on("click", respondOne);
   $("#rsvp-no" ).on("click", respondNo);
+  
+  $("#entree-halibut").on("click", respond("e1","halibut"));
+  $("#entree-lamb").on("click", respond("e1","lamb"));
+  $("#entree-vegetarian" ).on("click", respond("e1","vegetarian"));
+  $("#entree2-halibut").on("click", respond("e2","halibut"));
+  $("#entree2-lamb").on("click", respond("e2","lamb"));
+  $("#entree2-vegetarian" ).on("click", respond("e2","vegetarian"));
+
   $('#rsvp-music').on("input", updateText);
   $('#rsvp-food').on("input", updateText);
   $("#rsvp-name").html(Name);
   $("#rsvp").addClass("visible");
-  $( "#rsvp-status" ).html( "..." );
+  $( "#rsvp-status" ).html( "Loading..." );
   $.ajax({
     url: "/status",
     data: {
@@ -31,6 +39,12 @@ function go() {
   });
 }
 
+function respond(what, answer) {
+  Console.log("> " + what + " := " + answer)
+  clearTimeout($.data(this, 'timer'));
+  updateButtons();
+  respond();
+}
 function respondYes() {
   Response = "yes";
   clearTimeout($.data(this, 'timer'));
