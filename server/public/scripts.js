@@ -2,23 +2,23 @@
 var Name = getUrlParameter("name");
 var Name2 = getUrlParameter("name2");
 var Magic = getUrlParameter("magic");
-var Response = "";
+var Responses = {};
 
 if (Name !== "" && Magic !== "") {
   go();
 }
 
 function go() {
-  $("#rsvp-yes").on("click", respondYes);
-  $("#rsvp-one").on("click", respondOne);
-  $("#rsvp-no" ).on("click", respondNo);
+  $("#rsvp-yes").on("click", function() { respond("rsvp","yes") });
+  $("#rsvp-one").on("click", function() { respond("rsvp","one") });
+  $("#rsvp-no" ).on("click", function() { respond("rsvp","no") });
   
-  $("#entree-halibut").on("click", respond("e1","halibut"));
-  $("#entree-lamb").on("click", respond("e1","lamb"));
-  $("#entree-vegetarian" ).on("click", respond("e1","vegetarian"));
-  $("#entree2-halibut").on("click", respond("e2","halibut"));
-  $("#entree2-lamb").on("click", respond("e2","lamb"));
-  $("#entree2-vegetarian" ).on("click", respond("e2","vegetarian"));
+  $("#entree-halibut").on("click", function() { respond("menu1","halibut") });
+  $("#entree-lamb").on("click", function() { respond("menu1","lamb") });
+  $("#entree-vege" ).on("click", function() { respond("menu1","vege") });
+  $("#entree2-halibut").on("click", function() { respond("menu2","halibut") });
+  $("#entree2-lamb").on("click", function() { respond("menu2","lamb") });
+  $("#entree2-vege" ).on("click", function() { respond("menu2","vege") });
 
   $('#rsvp-music').on("input", updateText);
   $('#rsvp-food').on("input", updateText);
@@ -26,7 +26,7 @@ function go() {
   $("#rsvp").addClass("visible");
   $("#hotelprivate").addClass("visible");
   $("#hotelpublic").remove("visible");
-  $( "#rsvp-status" ).html( "Loading..." );
+  $("#rsvp-status").html( "Loading..." );
 
   if (Name2 !== "")
   {
@@ -39,6 +39,7 @@ function go() {
     url: "/status",
     data: {
       name: Name,
+      name2: Name2,
       magic: Magic
     },
     success: handleStatus,
@@ -53,41 +54,27 @@ function go() {
 }
 
 function respond(what, answer) {
-  Console.log("> " + what + " := " + answer)
-  clearTimeout($.data(this, 'timer'));
+  console.log("> " + what + " := " + answer)
+  Responses[what] = answer;
+  clearTimeout($.data(document.body, 'timer'));
   updateButtons();
-  respond();
-}
-function respondYes() {
-  Response = "yes";
-  clearTimeout($.data(this, 'timer'));
-  updateButtons();
-  respond();
-}
-function respondOne() {
-  Response = "one";
-  clearTimeout($.data(this, 'timer'));
-  updateButtons();
-  respond();
-}
-function respondNo() {
-  Response = "no";
-  clearTimeout($.data(this, 'timer'));
-  updateButtons();
-  respond();
+  sendResponse();
 }
 function updateText() {
-  clearTimeout($.data(this, 'timer'));
+  clearTimeout($.data(document.body, 'timer'));
   $( "#rsvp-status" ).html( "... ");
-  var wait = setTimeout(respond, 1000);
-  $(this).data('timer', wait);
+  var wait = setTimeout(sendResponse, 1000);
+  $.data(document.body, 'timer', wait);
 }
 
-function respond() {
+function sendResponse() {
   var data = {
     name: Name,
+    name2: Name2,
     magic: Magic,
-    response: Response ? Response : "",
+    response: Responses['rsvp'] ? Responses['rsvp'] : "",
+    menu1: Responses['menu1'] ? Responses['menu1'] : "",
+    menu2: Responses['menu2'] ? Responses['menu2'] : "",
     food: $("#rsvp-food").val() ? $("#rsvp-food").val() : "",
     music: $("#rsvp-music").val() ? $("#rsvp-music").val() : "" 
   };
@@ -124,25 +111,72 @@ function handleStatus (result) {
 }
 
 function updateButtons() {
-  switch (Response) {
+  console.log(Responses);
+  switch (Responses['rsvp']) {
     case "yes":
       $("#rsvp-yes").addClass("selected");
       $("#rsvp-one").removeClass("selected");
       $("#rsvp-no").removeClass("selected");
       break;
     case "one":
-      $("#rsvp-status").html( "'ed" );
       $("#rsvp-yes").removeClass("selected");
       $("#rsvp-one").addClass("selected");
       $("#rsvp-no").removeClass("selected");
       break;
     case "no":
-      $("#rsvp-status").html( "'ed" );
       $("#rsvp-yes").removeClass("selected");
       $("#rsvp-one").removeClass("selected");
       $("#rsvp-no").addClass("selected");
       break;
   }
+  switch (Responses['menu1']) {
+    case "halibut":
+      $("#entree-halibut").addClass("selected");
+      $("#entree-lamb").removeClass("selected");
+      $("#entree-vege").removeClass("selected");
+      break;
+    case "lamb":
+      $("#entree-halibut").removeClass("selected");
+      $("#entree-lamb").addClass("selected");
+      $("#entree-vege").removeClass("selected");
+      break;
+    case "vege":
+      $("#entree-halibut").removeClass("selected");
+      $("#entree-lamb").removeClass("selected");
+      $("#entree-vege").addClass("selected");
+      break;
+  }
+  switch (Responses['menu2']) {
+    case "halibut":
+      $("#entree2-halibut").addClass("selected");
+      $("#entree2-lamb").removeClass("selected");
+      $("#entree2-vege").removeClass("selected");
+      break;
+    case "lamb":
+      $("#entree2-halibut").removeClass("selected");
+      $("#entree2-lamb").addClass("selected");
+      $("#entree2-vege").removeClass("selected");
+      break;
+    case "vege":
+      $("#entree2-halibut").removeClass("selected");
+      $("#entree2-lamb").removeClass("selected");
+      $("#entree2-vege").addClass("selected");
+      break;
+  }
+  if (Name2 !== "") {
+    if (Responses['rsvp'] !== '' && Responses['food1'] !== '' && Responses['food2'] !== '') {
+      $("#rsvp-status").html( "All done!" );
+    } else {
+      $("#rsvp-status").html( "Waiting for your response..." );
+    }
+  } else {
+    if (Responses['rsvp'] !== '' && Responses['food1'] !== '') {
+      $("#rsvp-status").html( "All done!" );
+    } else {
+      $("#rsvp-status").html( "Waiting for your response..." );
+    }
+  }
+  
 }
 
 function getUrlParameter(name) {
