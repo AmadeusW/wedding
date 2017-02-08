@@ -21,7 +21,7 @@ function go() {
   $("#entree2-vege" ).on("click", function() { respond("menu2","vege") });
 
   $('#rsvp-music').on("input", updateText);
-  $('#rsvp-food').on("input", updateText);
+  $('#rsvp-comment').on("input", updateText);
   $("#rsvp-name").html(Name);
   $("#rsvp").addClass("visible");
   $("#hotelprivate").addClass("visible");
@@ -75,7 +75,7 @@ function sendResponse() {
     response: Responses['rsvp'] ? Responses['rsvp'] : "",
     menu1: Responses['menu1'] ? Responses['menu1'] : "",
     menu2: Responses['menu2'] ? Responses['menu2'] : "",
-    food: $("#rsvp-food").val() ? $("#rsvp-food").val() : "",
+    comment: $("#rsvp-comment").val() ? $("#rsvp-comment").val() : "",
     music: $("#rsvp-music").val() ? $("#rsvp-music").val() : "" 
   };
   $("#rsvp-status").html("ing");
@@ -85,12 +85,12 @@ function sendResponse() {
     data: data,
     success: function( result ) {
       console.debug("Received: " + JSON.stringify(result.response));
-      $( "#rsvp-status" ).html( "'ed ");
+      $( "#rsvp-status" ).html( "We have received your response. Thanks!");
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
       console.error(errorThrown);
-      $( "#rsvp-status" ).html( " error " + errorStatus );
+      $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
     }
   });
 }
@@ -99,13 +99,15 @@ function handleStatus (result) {
   console.debug("Status: " + JSON.stringify(result));
   $("#rsvp-name").html(result.name);
   $("#rsvp-music").val(result.music);
-  $("#rsvp-food").val(result.food);
+  $("#rsvp-comment").val(result.comment);
   $("#hotelcode").setAttribute('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
-  Response = result.response;
+  Response['rsvp'] = result.response;
+  Response['menu1'] = result.menu1;
+  Response['menu2'] = result.menu2;
   if (Response == "") {
     $("#rsvp-status" ).html("");
   } else {
-    $("#rsvp-status").html( "'ed" );
+    $("#rsvp-status").html( "We have received your response. Thanks!" );
     updateButtons();
   }
 }
