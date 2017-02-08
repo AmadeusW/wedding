@@ -1,5 +1,6 @@
 // On load, check query parameters
 var Name = getUrlParameter("name");
+var Name2 = getUrlParameter("name2");
 var Magic = getUrlParameter("magic");
 var Response = "";
 
@@ -23,7 +24,17 @@ function go() {
   $('#rsvp-food').on("input", updateText);
   $("#rsvp-name").html(Name);
   $("#rsvp").addClass("visible");
+  $("#hotelprivate").addClass("visible");
+  $("#hotelpublic").remove("visible");
   $( "#rsvp-status" ).html( "Loading..." );
+
+  if (Name2 !== "")
+  {
+    $("#foodprompt1").text(Name.substr(0, Name.indexOf(" ")) + ", pick your entrée:");
+    $("#foodprompt2").text(Name2.substr(0, Name2.indexOf(" ")) + ", pick your entrée:");
+    $("#food2").addClass("visible");
+  }
+
   $.ajax({
     url: "/status",
     data: {
@@ -33,6 +44,8 @@ function go() {
     success: handleStatus,
     error: function(jqHXR, errorStatus, errorThrown) {
       $("rsvp").removeClass("visible");
+      $("#hotelpublic").addClass("visible");
+      $("#hotelprivate").remove("visible");
       console.error(jqHXR);
       console.error(errorThrown);
     }
@@ -100,6 +113,7 @@ function handleStatus (result) {
   $("#rsvp-name").html(result.name);
   $("#rsvp-music").val(result.music);
   $("#rsvp-food").val(result.food);
+  $("#hotelcode").setAttribute('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
   Response = result.response;
   if (Response == "") {
     $("#rsvp-status" ).html("");

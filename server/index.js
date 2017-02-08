@@ -26,7 +26,8 @@ app.get('/status', function (req, res) {
       name: entity.Name ? entity.Name._ : "invalid",
       response: entity.Response ? entity.Response._ : "",
       music: entity.Music ? entity.Music._ : "",
-      food: entity.Food ? entity.Food._ : ""
+      food: entity.Food ? entity.Food._ : "",
+      hotelcode: "3A6CU9J6"
     });
   });
 })
