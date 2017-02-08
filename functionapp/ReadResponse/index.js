@@ -14,7 +14,11 @@ module.exports = function (context, req) {
             hotelcode: "3A6CU9J6"
         }
         res = {
-            // status: 200, /* Defaults to 200 */
+            status: 200,
+            headers: {
+                "Content-Type" : "application/json",
+                "Access-Control-Allow-Origin": "amadeusw.com"
+            },
             body: data
         };
     }
