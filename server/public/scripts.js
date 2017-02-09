@@ -36,7 +36,7 @@ function go() {
   }
 
   $.ajax({
-    url: "https://amadeusw-wedding.azurewebsites.net/api/WriteResponse?code=yTmbu9ckW7hVyWbEwkFodm8QID6ilAsma44LgNrEM8zcb5bnpBdNtw==",
+    url: "https://amadeusw-wedding.azurewebsites.net/api/Status?code=WHExFvqO4k/R8kqpukhru6fqneSD1cb1aP33J6HdGHNaNf14Bg8UEA==",
     data: {
       name: Name,
       name2: Name2,
