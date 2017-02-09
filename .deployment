@@ -1,0 +1,5 @@
+@echo off
+echo Running custom deployment script...
+rmdir %DEPLOYMENT_TARGET% /s /q
+xcopy "%DEPLOYMENT_SOURCE%\functionapp" %DEPLOYMENT_TARGET% /Y /S
+echo Functions are deployed.
