@@ -2,7 +2,7 @@ module.exports = function (context, req) {
     context.log('Request: ' + JSON.stringify(req));
     
     var data = context.bindings.weddingTable;
-    context.log(context.bindings);
+    context.log(context);
     context.log(data);
 
     if (data) {
