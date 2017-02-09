@@ -1,10 +1,12 @@
 module.exports = function (context, req) {
     context.log('Request: ' + JSON.stringify(req));
-
+    
     var data = context.bindings.weddingTable;
+    context.log(context.bindings);
+    context.log(data);
 
     if (data) {
-        var data = {
+        var response = {
             name: data.Name ? data.Name : "invalid",
             response: data.Response ? data.Response : "",
             music: data.Music ? data.Music : "",
@@ -19,7 +21,7 @@ module.exports = function (context, req) {
                 "Content-Type" : "application/json",
                 "Access-Control-Allow-Origin": "amadeusw.com"
             },
-            body: data
+            body: response
         };
     }
     else {
