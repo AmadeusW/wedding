@@ -1,6 +1,6 @@
-module.exports = function (context, req) {
+module.exports = function (context, req, weddingTable) {
     context.log('Request: ' + JSON.stringify(req));
-    
+    console.log(weddingTable);
     var data = context.bindings.weddingTable;
     context.log(context);
     context.log(data);
