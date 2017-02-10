@@ -95,7 +95,7 @@ p {
 
 .rsvpbuttons, .foodbuttons {
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 2em auto;
     display: flex;
     position: relative;
 }
