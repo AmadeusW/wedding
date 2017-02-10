@@ -5,6 +5,7 @@ module.exports = function (context, req) {
     context.log('Check: '+req.query.magic);
     if (req.query.magic !== "") {
         context.log('go!');
+        context.log('go2');
         var data = {
             magic: req.query.magic ? req.query.magic : "invalid",
             name: req.query.name ? req.query.name : "invalid",
@@ -15,6 +16,7 @@ module.exports = function (context, req) {
             comment: req.query.comment ? req.query.comment : "",
             music: req.query.music ? req.query.music : ""
         };
+        context.log('ok');
         console.log('Data: ' + JSON.stringify(data));
         res = {
             status: 200,
