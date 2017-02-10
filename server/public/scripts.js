@@ -81,7 +81,7 @@ function sendResponse() {
   $("#rsvp-status").html("ing");
   console.debug("Responding with: " + JSON.stringify(data))
   $.ajax({
-    url: "/respond",
+    url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
     data: data,
     success: function( result ) {
       console.debug("Received: " + JSON.stringify(result.response));
@@ -113,7 +113,7 @@ function handleStatus (result) {
 }
 
 function updateButtons() {
-  console.log(Responses);
+  console.log("Buttons: " + Responses);
   switch (Responses['rsvp']) {
     case "yes":
       $("#rsvp-yes").addClass("selected");

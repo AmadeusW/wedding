@@ -1,8 +1,9 @@
 module.exports = function (context, req) {
     context.log('Request: ' + JSON.stringify(req));
     // TODO: see what happens when magic is gone
+    context.log('Context: ' + JSON.stringify(context));
     var data = context.bindings.weddingTable;
-
+    /*
     if (data) {
         var data = {
             name: data.Name ? data.Name : "invalid",
@@ -27,6 +28,14 @@ module.exports = function (context, req) {
             status: 400,
             body: "Error"
         };
-    }
+    }*/
+    res = {
+        status: 200,
+        headers: {
+            "Content-Type" : "application/json",
+            "Access-Control-Allow-Origin": "amadeusw.com"
+        },
+        body: data
+    };    
     context.done(null, res);
 };
