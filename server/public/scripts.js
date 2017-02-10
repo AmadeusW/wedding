@@ -25,7 +25,7 @@ function go() {
   $("#rsvp-name").html(Name);
   $("#rsvp").addClass("visible");
   $("#hotelprivate").addClass("visible");
-  $("#hotelpublic").remove("visible");
+  $("#hotelpublic").removeClass("visible");
   $("#rsvp-status").html( "Loading..." );
 
   if (Name2 !== "")
@@ -46,7 +46,7 @@ function go() {
     error: function(jqHXR, errorStatus, errorThrown) {
       $("rsvp").removeClass("visible");
       $("#hotelpublic").addClass("visible");
-      $("#hotelprivate").remove("visible");
+      $("#hotelprivate").removeClass("visible");
       console.error(jqHXR);
       console.error(errorThrown);
     }

@@ -146,11 +146,11 @@ p {
     height: 500px;
 }
 
-.hotelpublic, .hotelprivate {
+#hotelpublic, #hotelprivate {
     display: none;
 }
 
-.hotelpublic.visible, .hotelprivate.visible {
+#hotelpublic.visible, #hotelprivate.visible {
     display: inline;
 }
 
