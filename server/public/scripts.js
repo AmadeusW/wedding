@@ -100,7 +100,7 @@ function handleStatus (result) {
   $("#rsvp-name").html(result.name);
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
-  $("#hotelcode").setAttribute('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
+  $("#hotelcode").attr('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
   Response['rsvp'] = result.response;
   Response['menu1'] = result.menu1;
   Response['menu2'] = result.menu2;
