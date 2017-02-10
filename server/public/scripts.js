@@ -79,7 +79,7 @@ function sendResponse() {
     comment: $("#rsvp-comment").val() ? $("#rsvp-comment").val() : "",
     music: $("#rsvp-music").val() ? $("#rsvp-music").val() : "" 
   };
-  $("#rsvp-status").html("ing");
+  $("#rsvp-status").html("Sending your response...");
   console.debug("Responding with: " + JSON.stringify(data))
   $.ajax({
     url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
