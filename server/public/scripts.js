@@ -62,7 +62,7 @@ function respond(what, answer) {
 }
 function updateText() {
   clearTimeout($.data(document.body, 'timer'));
-  $( "#rsvp-status" ).html( "... ");
+  $( "#rsvp-status" ).html( "Recording your response... ");
   var wait = setTimeout(sendResponse, 1000);
   $.data(document.body, 'timer', wait);
 }
@@ -101,10 +101,10 @@ function handleStatus (result) {
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
   $("#hotelcode").attr('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
-  Response['rsvp'] = result.response;
-  Response['menu1'] = result.menu1;
-  Response['menu2'] = result.menu2;
-  if (Response == "") {
+  Responses['rsvp'] = result.response;
+  Responses['menu1'] = result.menu1;
+  Responses['menu2'] = result.menu2;
+  if (Responses['rsvp'] == "") {
     $("#rsvp-status" ).html("");
   } else {
     $("#rsvp-status").html( "We have received your response. Thanks!" );
