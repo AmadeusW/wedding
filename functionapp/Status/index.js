@@ -8,6 +8,7 @@ module.exports = function (context, req) {
     if (data) {
         var response = {
             name: data.Name ? data.Name : "invalid",
+            name2: data.Name2 ? data.Name : "",
             response: data.Response ? data.Response : "",
             music: data.Music ? data.Music : "",
             comment: data.Comment ? data.Comment : "",
