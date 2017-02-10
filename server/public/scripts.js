@@ -33,6 +33,7 @@ function go() {
     $("#foodprompt1").text(Name.substr(0, Name.indexOf(" ")) + ", pick your entrée:");
     $("#foodprompt2").text(Name2.substr(0, Name2.indexOf(" ")) + ", pick your entrée:");
     $("#food2").addClass("visible");
+    $("#rsvp-one").addClass("visible");
   }
 
   $.ajax({

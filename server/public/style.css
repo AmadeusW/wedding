@@ -133,11 +133,11 @@ p {
     height: 2.6em;
 }
 
-#food2 {
+#food2, #rsvp-one {
     display: none;
 }
 
-#food2.visible {
+#food2.visible, #rsvp-one.visible {
     display: block;
 }
 
