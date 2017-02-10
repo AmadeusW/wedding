@@ -1,7 +1,6 @@
 module.exports = function (context, req) {
     context.log('Request: ' + JSON.stringify(req));
     context.log('Query: ' + JSON.stringify(req.query));
-    //context.log('Table: ' + JSON.stringify(context.bindings.weddingTable));
     context.log('Check: '+req.query.magic);
     if (req.query.magic !== "") {
         context.log('go!');
@@ -16,10 +15,12 @@ module.exports = function (context, req) {
             music: req.query.music ? req.query.music : ""
         };
         context.log('ok');
-        console.log('Data: ' + data);
+        context.log('Data: ' + data);
         context.log('ok2');
-        console.log('Data: ' + JSON.stringify(data));
+        context.log('Data: ' + JSON.stringify(data));
         context.log('ok3');
+        context.bindings.weddingTable = data;
+        context.log('saved!');
         res = {
             status: 200,
             headers: {
