@@ -5,7 +5,6 @@ module.exports = function (context, req) {
     context.log('Check: '+req.query.magic);
     if (req.query.magic !== "") {
         context.log('go!');
-        context.log('go2');
         var data = {
             magic: req.query.magic ? req.query.magic : "invalid",
             name: req.query.name ? req.query.name : "invalid",
@@ -17,7 +16,10 @@ module.exports = function (context, req) {
             music: req.query.music ? req.query.music : ""
         };
         context.log('ok');
+        console.log('Data: ' + data);
+        context.log('ok2');
         console.log('Data: ' + JSON.stringify(data));
+        context.log('ok3');
         res = {
             status: 200,
             headers: {
@@ -34,5 +36,6 @@ module.exports = function (context, req) {
             body: "Error"
         };
     }
+    context.log('Return: ' + JSON.stringify(res));
     context.done(null, res);
 };
