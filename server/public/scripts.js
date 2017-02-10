@@ -98,7 +98,11 @@ function sendResponse() {
 
 function handleStatus (result) {
   console.debug("Status: " + JSON.stringify(result));
-  $("#rsvp-name").html(result.name);
+  if (result.name2 == "") {
+    $("#rsvp-name").html(result.name);
+  } else {
+    $("#rsvp-name").html(result.name + " & " + result.name2);
+  }
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
   $("#hotelcode").attr('href', "http://book.bestwestern.com/bestwestern/groupSearch.do?groupId=" + result.hotelcode)
