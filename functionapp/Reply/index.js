@@ -1,19 +1,20 @@
 module.exports = function (context, req) {
     context.log('Request: ' + JSON.stringify(req));
-    // TODO: see what happens when magic is gone
-    context.log('Context: ' + JSON.stringify(context));
-    var data = context.bindings.weddingTable;
-    /*
-    if (data) {
+    context.log('Query: ' + JSON.stringify(req.query));
+    //context.log('Table: ' + JSON.stringify(context.bindings.weddingTable));
+    context.log('Check: '+req.query.magic);
+    if (req.query.magic !== "") {
         var data = {
-            name: data.Name ? data.Name : "invalid",
-            response: data.Response ? data.Response : "",
-            music: data.Music ? data.Music : "",
-            comment: data.Comment ? data.Comment : "",
-            menu1: data.Menu1 ? data.Menu1 : "",
-            menu2: data.Menu2 ? data.Menu2 : "",
-            hotelcode: "3A6CU9J6"
+            magic: req.query.magic ? req.query.magic : "invalid",
+            name: req.query.name ? req.query.name : "invalid",
+            name2: req.query.name2 ? req.query.name2 : "",
+            response: req.query.response ? req.query.response : "",
+            menu1: req.query.menu1 ? req.query.menu1 : "",
+            menu2: req.query.menu2 ? req.query.menu2 : "",
+            comment: req.query.comment ? req.query.comment : "",
+            music: req.query.music ? req.query.music : ""
         }
+        console.log('Data: ' + JSON.stringify(data));
         res = {
             status: 200,
             headers: {
@@ -28,14 +29,6 @@ module.exports = function (context, req) {
             status: 400,
             body: "Error"
         };
-    }*/
-    res = {
-        status: 200,
-        headers: {
-            "Content-Type" : "application/json",
-            "Access-Control-Allow-Origin": "amadeusw.com"
-        },
-        body: data
-    };    
+    }
     context.done(null, res);
 };
