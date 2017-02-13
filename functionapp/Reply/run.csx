@@ -28,7 +28,7 @@ public class Item : TableEntity
     public override string ToString() 
     {
         return $@"
-        {
+        {{
             magic: ""{magic}"",
             name: ""{name}"",
             name2: ""{name2}"",
@@ -37,6 +37,6 @@ public class Item : TableEntity
             menu2: ""{menu2}"",
             comment: ""{comment}"",
             music: ""{music}"",
-        }";
+        }}";
     }
 }
