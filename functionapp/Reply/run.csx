@@ -1,18 +1,34 @@
 #r "Microsoft.WindowsAzure.Storage"
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Net;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility;
+
+private static TelemetryClient telemetry = new TelemetryClient();
+private static string key = TelemetryConfiguration.Active.InstrumentationKey = System.Environment.GetEnvironmentVariable("APPINSIGHTS_INSTRUMENTATIONKEY", EnvironmentVariableTarget.Process);
 
 public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingTable, TraceWriter log)
 {
     log.Info("Received " + item.ToString());
-    item.PartitionKey = "guest";
-    item.RowKey = item.magic;
-    item.ETag = "*";
+    telemetry.TrackEvent("Response", {{"item", item.ToString()}});
+    try
+    {
+        item.PartitionKey = "guest";
+        item.RowKey = item.magic;
+        item.ETag = "*";
 
-    var operation = TableOperation.Replace(item);
-    await weddingTable.ExecuteAsync(operation);
+        var operation = TableOperation.Replace(item);
+        await weddingTable.ExecuteAsync(operation);
 
-    return new HttpResponseMessage(HttpStatusCode.NoContent);
+        return new HttpResponseMessage(HttpStatusCode.NoContent);
+    }
+    catch (System.Exception)
+    {
+        telemetry.TrackEvent("Error", {{"item", item.ToString()}});
+        throw;
+    }
+    
 }
 
 public class Item : TableEntity
