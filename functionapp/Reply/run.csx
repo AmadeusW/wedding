@@ -4,7 +4,7 @@ using System.Net;
 
 public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingTable, TraceWriter log)
 {
-    log.Info("Received a reply");
+    log.Info("Received " + item.ToString());
     item.PartitionKey = "guest";
     item.RowKey = item.magic;
     item.ETag = "*";
@@ -24,4 +24,19 @@ public class Item : TableEntity
     public string menu2 { get; set; }
     public string comment { get; set; }
     public string music { get; set; }
+
+    public override string ToString() 
+    {
+        return $@"
+        {
+            magic: ""{magic}"",
+            name: ""{name}"",
+            name2: ""{name2}"",
+            response: ""{response}"",
+            menu1: ""{menu1}"",
+            menu2: ""{menu2}"",
+            comment: ""{comment}"",
+            music: ""{music}"",
+        }";
+    }
 }
