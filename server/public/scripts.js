@@ -85,7 +85,6 @@ function sendResponse() {
     url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
     data: data,
     success: function( result ) {
-      console.debug("Received: " + JSON.stringify(result.response));
       $( "#rsvp-status" ).html( "We have received your response. Thanks!");
     },
     error: function(jqHXR, errorStatus, errorThrown) {
