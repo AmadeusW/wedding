@@ -11,7 +11,7 @@ public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingT
     item.ETag = "*";
     log.Info(item.ToString());
     var operation = TableOperation.Replace(item);
-    await outputTable.ExecuteAsync(operation);
+    await weddingTable.ExecuteAsync(operation);
 
     return new HttpResponseMessage(HttpStatusCode.NoContent);
 }
