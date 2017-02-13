@@ -24,9 +24,9 @@ public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingT
 
         return new HttpResponseMessage(HttpStatusCode.NoContent);
     }
-    catch (System.Exception)
+    catch (System.Exception e)
     {
-        telemetry.TrackEvent("Error", {{"item", item.ToString()}});
+        telemetry.TrackException(e);
         throw;
     }
     
