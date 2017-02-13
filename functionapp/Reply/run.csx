@@ -2,7 +2,7 @@
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Net;
 
-public static async Task<HttpResponseMessage> Run(Item item, CloudTable outputTable, TraceWriter log)
+public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingTable, TraceWriter log)
 {
     log.Info("Received a reply");
     log.Info(item.ToString());
