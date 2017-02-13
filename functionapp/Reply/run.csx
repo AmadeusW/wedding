@@ -1,5 +1,5 @@
 #r "Microsoft.WindowsAzure.Storage"
-#r "Microsoft.ApplicationInsights"
+
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Net;
 using Microsoft.ApplicationInsights;
