@@ -4,12 +4,12 @@ using System.Net;
 
 public static async Task<HttpResponseMessage> Run(Item item, CloudTable outputTable, TraceWriter log)
 {
-    log.Debug("Received a reply");
-    log.Debug(item);
+    log.Info("Received a reply");
+    log.Info(item);
     item.PartitionKey = "guest";
     item.RowKey = item.magic;
     item.ETag = "*";
-
+    log.Info(item);
     var operation = TableOperation.Replace(item);
     await outputTable.ExecuteAsync(operation);
 
