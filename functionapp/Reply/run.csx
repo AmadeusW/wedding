@@ -1,4 +1,5 @@
 #r "Microsoft.WindowsAzure.Storage"
+#r "Microsoft.ApplicationInsights"
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Net;
 using Microsoft.ApplicationInsights;
@@ -11,7 +12,7 @@ private static string key = TelemetryConfiguration.Active.InstrumentationKey = S
 public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingTable, TraceWriter log)
 {
     log.Info("Received " + item.ToString());
-    telemetry.TrackEvent("Response", {{"item", item.ToString()}});
+    telemetry.TrackEvent("Response", new Dictionary<string, string>{{"item", item.ToString()}});
     try
     {
         item.PartitionKey = "guest";
