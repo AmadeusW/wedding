@@ -5,11 +5,9 @@ using System.Net;
 public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingTable, TraceWriter log)
 {
     log.Info("Received a reply");
-    log.Info(item.ToString());
     item.PartitionKey = "guest";
     item.RowKey = item.magic;
     item.ETag = "*";
-    log.Info(item.ToString());
     var operation = TableOperation.Replace(item);
     await weddingTable.ExecuteAsync(operation);
 
