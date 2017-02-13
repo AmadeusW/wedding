@@ -6,7 +6,7 @@ public static async Task<HttpResponseMessage> Run(Item item, CloudTable weddingT
 {
     log.Info("Received " + item.ToString());
     item.PartitionKey = "guest";
-    item.RowKey = "666";
+    item.RowKey = item.magic;
     item.ETag = "*";
 
     var operation = TableOperation.Replace(item);
