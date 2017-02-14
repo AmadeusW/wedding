@@ -70,7 +70,6 @@ public class Response
 
 public class StoredData : TableEntity
 {
-    public string RowKey { get; set; }
     public string name { get; set; }
     public string name2 { get; set; }
     public string response { get; set; }
@@ -83,7 +82,7 @@ public class StoredData : TableEntity
     {
         return $@"
         {{
-            PartitionKey: ""{PartitionKey}}"",
+            PartitionKey: ""{PartitionKey}"",
             RowKey: ""{RowKey}"",
             ETag: ""{ETag}"",
             name: ""{name}"",
