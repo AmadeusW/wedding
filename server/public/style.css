@@ -26,6 +26,7 @@ h1 {
 h2 {
     color: #555;
     font-size: 2.7em;
+    line-height: 125%;
 }
 
 h3 {
@@ -94,7 +95,7 @@ p {
 }
 
 .rsvpbuttons, .foodbuttons {
-    width: 50%;
+    width: 70%;
     margin: 0 auto 2em auto;
     display: flex;
     position: relative;
