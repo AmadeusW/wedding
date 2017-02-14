@@ -16,9 +16,9 @@ public static async Task<HttpResponseMessage> Run(Response item, CloudTable wedd
     try
     {
         var storedItem = new StoredData();
-        item.PartitionKey = "guest";
-        item.RowKey = item.magic;
-        item.ETag = "*";
+        storedItem.PartitionKey = "guest";
+        storedItem.RowKey = item.magic;
+        storedItem.ETag = "*";
         storedItem.name = item.name;
         storedItem.name2 = item.name2;
         storedItem.response = item.response;
