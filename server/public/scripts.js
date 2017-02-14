@@ -100,7 +100,7 @@ function handleStatus (result) {
   if (result.name2 == "") {
     $("#rsvp-name").html(result.name);
   } else {
-    $("#rsvp-name").html(result.name + "<br />&amp;" + result.name2);
+    $("#rsvp-name").html(result.name + "<br />&amp; " + result.name2);
   }
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
