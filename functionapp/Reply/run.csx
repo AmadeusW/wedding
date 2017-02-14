@@ -27,6 +27,7 @@ public static async Task<HttpResponseMessage> Run(Response item, CloudTable wedd
         storedItem.comment = item.comment;
         storedItem.music = item.music;
 
+        log.Info("Saving " + storedItem.ToString());
         var operation = TableOperation.Replace(storedItem);
         await weddingTable.ExecuteAsync(operation);
 
@@ -82,7 +83,9 @@ public class StoredData : TableEntity
     {
         return $@"
         {{
+            PartitionKey: ""{PartitionKey}}"",
             RowKey: ""{RowKey}"",
+            ETag: ""{ETag}"",
             name: ""{name}"",
             name2: ""{name2}"",
             response: ""{response}"",
