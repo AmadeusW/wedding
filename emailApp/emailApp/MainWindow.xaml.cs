@@ -76,7 +76,7 @@ Amadeusz & Bianca";
 
         private void save()
         {
-            csv[index][6] = "sent";
+            csv[index][12] = "sent";
             DisplayData();
 
             using (StreamWriter file = new StreamWriter((locationBox.Text).Trim('\"')))
