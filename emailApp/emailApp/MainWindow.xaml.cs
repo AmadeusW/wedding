@@ -83,7 +83,7 @@ Amadeusz & Bianca";
             {
                 foreach (var row in csv)
                 {
-                    file.Write(String.Join(",", row));
+                    file.WriteLine(String.Join(",", row));
                 }
             }
         }
