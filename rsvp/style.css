@@ -8,6 +8,7 @@ body {
 
 section {
     border: solid #f6f6ea;
+    background: #faffff;
     border-width: 0px 3px 0px 1px;
     max-width: 70%;
     margin: 0 auto;
@@ -45,24 +46,11 @@ p {
 }
 
 #rsvp {
-    background: #faffff;
     display: none;
 }
 
 #rsvp.visible {
     display: block;
-}
-
-#map {
-    background: #fcfffc;
-}
-
-#schedule {
-    background: #faffff;
-}
-
-#photos {
-    background: #fffcfc;
 }
 
 #schedule h4 {
@@ -90,6 +78,7 @@ p {
 .foodbuttons button {
     flex-grow: 1;
     width: 33%;
+    min-height: 3em;
     padding: 0.2em;
     height: auto;
     font-family: 'Slabo 27px', serif;
