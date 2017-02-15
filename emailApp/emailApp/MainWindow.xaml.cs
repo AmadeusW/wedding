@@ -92,19 +92,19 @@ We're looking forward to seeing you!
         private void DisplayData()
         {
             var guest = csv[index];
-            var fn1 = guest[0].Trim();
-            var ln1 = guest[1].Trim();
-            var fn2 = guest[2].Trim();
-            var ln2 = guest[3].Trim();
-            var e1 = guest[4].Trim();
-            var e2 = guest[5].Trim();
-            var sent = guest[6].Trim();
+            var fn1 = guest[9].Trim();
+            //var ln1 = guest[1].Trim();
+            var fn2 = guest[10].Trim();
+            //var ln2 = guest[3].Trim();
+            var e1 = guest[0].Trim();
+            var e2 = guest[1].Trim();
+            var sent = guest[12].Trim();
 
             var name = $"{fn1}";
             if (!String.IsNullOrWhiteSpace(fn2))
                 name += $" and {fn2}";
 
-            var content = String.Format(raw, name); ;
+            var content = String.Format(raw, name);
 
             var email = e1;
             if (!String.IsNullOrWhiteSpace(e2))
