@@ -30,12 +30,10 @@ namespace emailApp
         int index = 0;
         const string raw = @"Dear {0},
  
-We are excited to invite you to our wedding on April 22nd! 
-Your invitation and RSVP can be found here. 
-Please respond by March 19th.
+We are excited to invite you to our wedding on April 22nd! Your invitation and RSVP can be found here. Please respond by March 19th.
  
 Thank you,
-  Amadeusz & Bianca
+Amadeusz & Bianca
 {1}";
 
         private void LoadClick(object sender, RoutedEventArgs e)
