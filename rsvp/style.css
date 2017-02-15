@@ -44,35 +44,6 @@ p {
     margin: 1em auto;
 }
 
-/* Portrait and Landscape */
-@media only screen
-  and (max-width: 736px)  {
-    section {
-        max-width: 98%;
-    }
-    .rsvpbuttons {
-        width: 100%;
-    }
-
-    #rsvp input {
-        width: 100%;
-    }
-}
-/* Portrait and Landscape */
-@media only screen
-  and (max-width: 736%)  {
-    section {
-        max-width: 90%;
-    }
-    .rsvpbuttons {
-        width: 90%;
-    }
-
-    #rsvp input {
-        width: 90%;
-    }
-}
-
 #rsvp {
     background: #faffff;
     display: none;
@@ -130,7 +101,7 @@ p {
 }
 
 #rsvp input {
-    width: 45%;
+    width: 70%;
     height: 2.6em;
 }
 
@@ -174,4 +145,37 @@ a, a:visited {
 a:hover {
     color: #339;
     text-decoration-style: underline;
+}
+
+/* Portrait and Landscape */
+@media only screen
+  and (max-width: 950px)  {
+    section {
+        max-width: 80%;
+    }
+    .rsvpbuttons, .foodbuttons {
+        width: 85%;
+    }
+
+    #rsvp input {
+        width: 85%;
+    }
+}
+/* Portrait and Landscape */
+@media only screen
+  and (max-width: 736px)  {
+    section {
+        max-width: 96%;
+    }
+    .rsvpbuttons, .foodbuttons {
+        width: 96%;
+    }
+
+    #rsvp input {
+        width: 96%;
+    }
+    h1 {
+        font-size: 3em;
+        line-height: 115%;
+    }
 }
