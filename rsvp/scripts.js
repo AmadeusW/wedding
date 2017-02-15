@@ -46,7 +46,7 @@ function go() {
     },
     success: handleStatus,
     error: function(jqHXR, errorStatus, errorThrown) {
-      $("rsvp").removeClass("visible");
+      $("#rsvp").removeClass("visible");
       $("#hotelpublic").addClass("visible");
       $("#hotelprivate").removeClass("visible");
       console.error(jqHXR);
@@ -86,14 +86,13 @@ function sendResponse() {
     url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
     data: data,
     success: function( result ) {
-      $( "#rsvp-status" ).html( "We have received your response. Thanks!");
       updateButtons(false);
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
       console.error(errorThrown);
-      $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
       updateButtons(true);
+      $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
     }
   });
 }
