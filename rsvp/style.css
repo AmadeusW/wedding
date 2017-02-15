@@ -65,6 +65,10 @@ p {
     background: #fffcfc;
 }
 
+#schedule h4 {
+    display: inline;
+}
+
 .rsvpbuttons, .foodbuttons {
     width: 70%;
     margin: 0 auto 2em auto;

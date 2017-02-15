@@ -112,7 +112,7 @@ function handleStatus (result) {
   if (Responses['rsvp'] == "") {
     $("#rsvp-status" ).html("");
   } else {
-    $("#rsvp-status").html( "We have received your response. Thanks!" );
+    $("#rsvp-status").html("");
     updateButtons();
   }
 }
@@ -172,13 +172,13 @@ function updateButtons() {
   }
   if (Name2 !== "") {
     if (Responses['rsvp'] !== '' && Responses['food1'] !== '' && Responses['food2'] !== '') {
-      $("#rsvp-status").html( "All done!" );
+      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
     } else {
       $("#rsvp-status").html( "Waiting for your response..." );
     }
   } else {
     if (Responses['rsvp'] !== '' && Responses['food1'] !== '') {
-      $("#rsvp-status").html( "All done!" );
+      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
     } else {
       $("#rsvp-status").html( "Waiting for your response..." );
     }
