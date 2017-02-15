@@ -30,10 +30,11 @@ function go() {
 
   if (Name2 !== "")
   {
-    $("#foodprompt1").text(Name.substr(0, Name.indexOf(" ")) + ", pick your entrée:");
-    $("#foodprompt2").text(Name2.substr(0, Name2.indexOf(" ")) + ", pick your entrée:");
+    $("#foodprompt1").text(Name + ", pick your entrée:");
+    $("#foodprompt2").text(Name2 + ", pick your entrée:");
     $("#food2").addClass("visible");
     $("#rsvp-one").addClass("visible");
+    $("#rsvp-name").html(Name + " &amp; " + Name2);
   }
 
   $.ajax({
@@ -100,7 +101,7 @@ function handleStatus (result) {
   if (result.name2 == "") {
     $("#rsvp-name").html(result.name);
   } else {
-    $("#rsvp-name").html(result.name + "<br />&amp; " + result.name2);
+    $("#rsvp-name").html(result.name + " &amp; " + result.name2);
   }
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
