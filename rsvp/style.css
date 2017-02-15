@@ -8,6 +8,7 @@ body {
 
 section {
     border: solid #f6f6ea;
+    background: #faffff;
     border-width: 0px 3px 0px 1px;
     max-width: 70%;
     margin: 0 auto;
@@ -44,37 +45,7 @@ p {
     margin: 1em auto;
 }
 
-/* Portrait and Landscape */
-@media only screen
-  and (max-width: 736px)  {
-    section {
-        max-width: 98%;
-    }
-    .rsvpbuttons {
-        width: 100%;
-    }
-
-    #rsvp input {
-        width: 100%;
-    }
-}
-/* Portrait and Landscape */
-@media only screen
-  and (max-width: 736%)  {
-    section {
-        max-width: 90%;
-    }
-    .rsvpbuttons {
-        width: 90%;
-    }
-
-    #rsvp input {
-        width: 90%;
-    }
-}
-
 #rsvp {
-    background: #faffff;
     display: none;
 }
 
@@ -82,16 +53,8 @@ p {
     display: block;
 }
 
-#map {
-    background: #fcfffc;
-}
-
-#schedule {
-    background: #faffff;
-}
-
-#photos {
-    background: #fffcfc;
+#schedule h4 {
+    display: inline;
 }
 
 .rsvpbuttons, .foodbuttons {
@@ -115,6 +78,7 @@ p {
 .foodbuttons button {
     flex-grow: 1;
     width: 33%;
+    min-height: 3em;
     padding: 0.2em;
     height: auto;
     font-family: 'Slabo 27px', serif;
@@ -129,8 +93,13 @@ p {
     color: #000;
 }
 
+.rsvpbuttons button.sent, .foodbuttons button.sent {
+    background-color: #af9;
+    color: #000;
+}
+
 #rsvp input {
-    width: 45%;
+    width: 70%;
     height: 2.6em;
 }
 
@@ -174,4 +143,37 @@ a, a:visited {
 a:hover {
     color: #339;
     text-decoration-style: underline;
+}
+
+/* Portrait and Landscape */
+@media only screen
+  and (max-width: 950px)  {
+    section {
+        max-width: 80%;
+    }
+    .rsvpbuttons, .foodbuttons {
+        width: 85%;
+    }
+
+    #rsvp input {
+        width: 85%;
+    }
+}
+/* Portrait and Landscape */
+@media only screen
+  and (max-width: 736px)  {
+    section {
+        max-width: 96%;
+    }
+    .rsvpbuttons, .foodbuttons {
+        width: 96%;
+    }
+
+    #rsvp input {
+        width: 96%;
+    }
+    h1 {
+        font-size: 3em;
+        line-height: 115%;
+    }
 }

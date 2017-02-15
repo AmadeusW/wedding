@@ -30,10 +30,11 @@ function go() {
 
   if (Name2 !== "")
   {
-    $("#foodprompt1").text(Name.substr(0, Name.indexOf(" ")) + ", pick your entrée:");
-    $("#foodprompt2").text(Name2.substr(0, Name2.indexOf(" ")) + ", pick your entrée:");
+    $("#foodprompt1").text(Name + ", pick your entrée:");
+    $("#foodprompt2").text(Name2 + ", pick your entrée:");
     $("#food2").addClass("visible");
     $("#rsvp-one").addClass("visible");
+    $("#rsvp-name").html(Name + " &amp; " + Name2);
   }
 
   $.ajax({
@@ -45,7 +46,7 @@ function go() {
     },
     success: handleStatus,
     error: function(jqHXR, errorStatus, errorThrown) {
-      $("rsvp").removeClass("visible");
+      $("#rsvp").removeClass("visible");
       $("#hotelpublic").addClass("visible");
       $("#hotelprivate").removeClass("visible");
       console.error(jqHXR);
@@ -58,7 +59,7 @@ function respond(what, answer) {
   console.log("> " + what + " := " + answer)
   Responses[what] = answer;
   clearTimeout($.data(document.body, 'timer'));
-  updateButtons();
+  updateButtons(true);
   sendResponse();
 }
 function updateText() {
@@ -85,11 +86,12 @@ function sendResponse() {
     url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
     data: data,
     success: function( result ) {
-      $( "#rsvp-status" ).html( "We have received your response. Thanks!");
+      updateButtons(false);
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
       console.error(errorThrown);
+      updateButtons(true);
       $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
     }
   });
@@ -100,7 +102,7 @@ function handleStatus (result) {
   if (result.name2 == "") {
     $("#rsvp-name").html(result.name);
   } else {
-    $("#rsvp-name").html(result.name + "<br />&amp; " + result.name2);
+    $("#rsvp-name").html(result.name + " &amp; " + result.name2);
   }
   $("#rsvp-music").val(result.music);
   $("#rsvp-comment").val(result.comment);
@@ -108,81 +110,69 @@ function handleStatus (result) {
   Responses['rsvp'] = result.response;
   Responses['menu1'] = result.menu1;
   Responses['menu2'] = result.menu2;
-  if (Responses['rsvp'] == "") {
-    $("#rsvp-status" ).html("");
-  } else {
-    $("#rsvp-status").html( "We have received your response. Thanks!" );
-    updateButtons();
-  }
+  updateButtons(false);
 }
 
-function updateButtons() {
+function updateButtons(fromUI) {
   console.log("Buttons: " + Responses);
+  var className = fromUI === true ? "selected" : "selected sent"
+  console.log("Update buttons, with class " + className + " because of " + fromUI)
+  
+  $("#rsvp-yes").removeClass("selected sent");
+  $("#rsvp-one").removeClass("selected sent");
+  $("#rsvp-no").removeClass("selected sent");
+  $("#entree-halibut").removeClass("selected sent");
+  $("#entree-lamb").removeClass("selected sent");
+  $("#entree-vege").removeClass("selected sent");
+  $("#entree2-halibut").removeClass("selected sent");
+  $("#entree2-lamb").removeClass("selected sent");
+  $("#entree2-vege").removeClass("selected sent");
   switch (Responses['rsvp']) {
     case "yes":
-      $("#rsvp-yes").addClass("selected");
-      $("#rsvp-one").removeClass("selected");
-      $("#rsvp-no").removeClass("selected");
+      $("#rsvp-yes").addClass(className);
       break;
     case "one":
-      $("#rsvp-yes").removeClass("selected");
-      $("#rsvp-one").addClass("selected");
-      $("#rsvp-no").removeClass("selected");
+      $("#rsvp-one").addClass(className);
       break;
     case "no":
-      $("#rsvp-yes").removeClass("selected");
-      $("#rsvp-one").removeClass("selected");
-      $("#rsvp-no").addClass("selected");
+      $("#rsvp-no").addClass(className);
       break;
   }
   switch (Responses['menu1']) {
     case "halibut":
-      $("#entree-halibut").addClass("selected");
-      $("#entree-lamb").removeClass("selected");
-      $("#entree-vege").removeClass("selected");
+      $("#entree-halibut").addClass(className);
       break;
     case "lamb":
-      $("#entree-halibut").removeClass("selected");
-      $("#entree-lamb").addClass("selected");
-      $("#entree-vege").removeClass("selected");
+      $("#entree-lamb").addClass(className);
       break;
     case "vege":
-      $("#entree-halibut").removeClass("selected");
-      $("#entree-lamb").removeClass("selected");
-      $("#entree-vege").addClass("selected");
+      $("#entree-vege").addClass(className);
       break;
   }
   switch (Responses['menu2']) {
     case "halibut":
-      $("#entree2-halibut").addClass("selected");
-      $("#entree2-lamb").removeClass("selected");
-      $("#entree2-vege").removeClass("selected");
+      $("#entree2-halibut").addClass(className);
       break;
     case "lamb":
-      $("#entree2-halibut").removeClass("selected");
-      $("#entree2-lamb").addClass("selected");
-      $("#entree2-vege").removeClass("selected");
+      $("#entree2-lamb").addClass(className);
       break;
     case "vege":
-      $("#entree2-halibut").removeClass("selected");
-      $("#entree2-lamb").removeClass("selected");
-      $("#entree2-vege").addClass("selected");
+      $("#entree2-vege").addClass(className);
       break;
   }
   if (Name2 !== "") {
     if (Responses['rsvp'] !== '' && Responses['food1'] !== '' && Responses['food2'] !== '') {
-      $("#rsvp-status").html( "All done!" );
+      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
     } else {
       $("#rsvp-status").html( "Waiting for your response..." );
     }
   } else {
     if (Responses['rsvp'] !== '' && Responses['food1'] !== '') {
-      $("#rsvp-status").html( "All done!" );
+      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
     } else {
       $("#rsvp-status").html( "Waiting for your response..." );
     }
   }
-  
 }
 
 function getUrlParameter(name) {
