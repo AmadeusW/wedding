@@ -117,54 +117,46 @@ function updateButtons(fromUI) {
   console.log("Buttons: " + Responses);
   var className = fromUI === true ? "selected" : "selected sent"
   console.log("Update buttons, with class " + className + " because of " + fromUI)
+  
+  $("#rsvp-yes").removeClass("selected sent");
+  $("#rsvp-one").removeClass("selected sent");
+  $("#rsvp-no").removeClass("selected sent");
+  $("#entree-halibut").removeClass("selected sent");
+  $("#entree-lamb").removeClass("selected sent");
+  $("#entree-vege").removeClass("selected sent");
+  $("#entree2-halibut").removeClass("selected sent");
+  $("#entree2-lamb").removeClass("selected sent");
+  $("#entree2-vege").removeClass("selected sent");
   switch (Responses['rsvp']) {
     case "yes":
       $("#rsvp-yes").addClass(className);
-      $("#rsvp-one").removeClass("selected sent");
-      $("#rsvp-no").removeClass("selected sent");
       break;
     case "one":
-      $("#rsvp-yes").removeClass("selected sent");
       $("#rsvp-one").addClass(className);
-      $("#rsvp-no").removeClass("selected sent");
       break;
     case "no":
-      $("#rsvp-yes").removeClass("selected sent");
-      $("#rsvp-one").removeClass("selected sent");
       $("#rsvp-no").addClass(className);
       break;
   }
   switch (Responses['menu1']) {
     case "halibut":
       $("#entree-halibut").addClass(className);
-      $("#entree-lamb").removeClass("selected sent");
-      $("#entree-vege").removeClass("selected sent");
       break;
     case "lamb":
-      $("#entree-halibut").removeClass("selected sent");
       $("#entree-lamb").addClass(className);
-      $("#entree-vege").removeClass("selected sent");
       break;
     case "vege":
-      $("#entree-halibut").removeClass("selected sent");
-      $("#entree-lamb").removeClass("selected sent");
       $("#entree-vege").addClass(className);
       break;
   }
   switch (Responses['menu2']) {
     case "halibut":
       $("#entree2-halibut").addClass(className);
-      $("#entree2-lamb").removeClass("selected sent");
-      $("#entree2-vege").removeClass("selected sent");
       break;
     case "lamb":
-      $("#entree2-halibut").removeClass("selected sent");
       $("#entree2-lamb").addClass(className);
-      $("#entree2-vege").removeClass("selected sent");
       break;
     case "vege":
-      $("#entree2-halibut").removeClass("selected sent");
-      $("#entree2-lamb").removeClass("selected sent");
       $("#entree2-vege").addClass(className);
       break;
   }
