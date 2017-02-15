@@ -104,6 +104,11 @@ p {
     color: #000;
 }
 
+.rsvpbuttons button.sent, .foodbuttons button.sent {
+    background-color: #af9;
+    color: #000;
+}
+
 #rsvp input {
     width: 70%;
     height: 2.6em;

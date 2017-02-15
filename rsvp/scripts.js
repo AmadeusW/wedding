@@ -59,7 +59,7 @@ function respond(what, answer) {
   console.log("> " + what + " := " + answer)
   Responses[what] = answer;
   clearTimeout($.data(document.body, 'timer'));
-  updateButtons();
+  updateButtons(true);
   sendResponse();
 }
 function updateText() {
@@ -87,11 +87,13 @@ function sendResponse() {
     data: data,
     success: function( result ) {
       $( "#rsvp-status" ).html( "We have received your response. Thanks!");
+      updateButtons(false);
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
       console.error(errorThrown);
       $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
+      updateButtons(true);
     }
   });
 }
@@ -109,65 +111,62 @@ function handleStatus (result) {
   Responses['rsvp'] = result.response;
   Responses['menu1'] = result.menu1;
   Responses['menu2'] = result.menu2;
-  if (Responses['rsvp'] == "") {
-    $("#rsvp-status" ).html("");
-  } else {
-    $("#rsvp-status").html("");
-    updateButtons();
-  }
+  updateButtons(false);
 }
 
-function updateButtons() {
+function updateButtons(fromUI) {
   console.log("Buttons: " + Responses);
+  var className = fromUI === true ? "selected" : "selected sent"
+  console.log("Update buttons, with class " + className + " because of " + fromUI)
   switch (Responses['rsvp']) {
     case "yes":
-      $("#rsvp-yes").addClass("selected");
-      $("#rsvp-one").removeClass("selected");
-      $("#rsvp-no").removeClass("selected");
+      $("#rsvp-yes").addClass(className);
+      $("#rsvp-one").removeClass("selected sent");
+      $("#rsvp-no").removeClass("selected sent");
       break;
     case "one":
-      $("#rsvp-yes").removeClass("selected");
-      $("#rsvp-one").addClass("selected");
-      $("#rsvp-no").removeClass("selected");
+      $("#rsvp-yes").removeClass("selected sent");
+      $("#rsvp-one").addClass(className);
+      $("#rsvp-no").removeClass("selected sent");
       break;
     case "no":
-      $("#rsvp-yes").removeClass("selected");
-      $("#rsvp-one").removeClass("selected");
-      $("#rsvp-no").addClass("selected");
+      $("#rsvp-yes").removeClass("selected sent");
+      $("#rsvp-one").removeClass("selected sent");
+      $("#rsvp-no").addClass(className);
       break;
   }
   switch (Responses['menu1']) {
     case "halibut":
-      $("#entree-halibut").addClass("selected");
-      $("#entree-lamb").removeClass("selected");
-      $("#entree-vege").removeClass("selected");
+      $("#entree-halibut").addClass(className);
+      $("#entree-lamb").removeClass("selected sent");
+      $("#entree-vege").removeClass("selected sent");
       break;
     case "lamb":
-      $("#entree-halibut").removeClass("selected");
-      $("#entree-lamb").addClass("selected");
-      $("#entree-vege").removeClass("selected");
+      $("#entree-halibut").removeClass("selected sent");
+      $("#entree-lamb").addClass(className);
+      $("#entree-vege").removeClass("selected sent");
       break;
     case "vege":
-      $("#entree-halibut").removeClass("selected");
-      $("#entree-lamb").removeClass("selected");
-      $("#entree-vege").addClass("selected");
+      $("#entree-halibut").removeClass("selected sent");
+      $("#entree-lamb").removeClass("selected sent");
+      $("#entree-vege").addClass(className);
       break;
   }
   switch (Responses['menu2']) {
     case "halibut":
-      $("#entree2-halibut").addClass("selected");
-      $("#entree2-lamb").removeClass("selected");
-      $("#entree2-vege").removeClass("selected");
+      $("#entree2-halibut").addClass(className);
+      $("#entree2-lamb").removeClass("selected sent");
+      $("#entree2-vege").removeClass("selected sent");
       break;
     case "lamb":
-      $("#entree2-halibut").removeClass("selected");
-      $("#entree2-lamb").addClass("selected");
-      $("#entree2-vege").removeClass("selected");
+      $("#entree2-halibut").removeClass("selected sent");
+      $("#entree2-lamb").addClass(className);
+      $("#entree2-vege").removeClass("selected sent");
       break;
     case "vege":
-      $("#entree2-halibut").removeClass("selected");
-      $("#entree2-lamb").removeClass("selected");
-      $("#entree2-vege").addClass("selected");
+      $("#entree2-halibut").removeClass("selected sent");
+      $("#entree2-lamb").removeClass("selected sent");
+      $("#entree2-vege").addClass(className);
       break;
   }
   if (Name2 !== "") {
@@ -183,7 +182,6 @@ function updateButtons() {
       $("#rsvp-status").html( "Waiting for your response..." );
     }
   }
-  
 }
 
 function getUrlParameter(name) {
