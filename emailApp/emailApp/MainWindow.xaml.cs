@@ -33,8 +33,7 @@ namespace emailApp
 We are excited to invite you to our wedding on April 22nd! Your invitation and RSVP can be found here. Please respond by March 19th.
  
 Thank you,
-Amadeusz & Bianca
-{1}";
+Amadeusz & Bianca";
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
@@ -122,10 +121,11 @@ Amadeusz & Bianca
                 email += $"; {e2}";
 
             addressBox.Text = email;
-            subjectBox.Text = "Save the date for Amadeusz and Bianca";
+            subjectBox.Text = "Amadeusz and Bianca are getting married!";
             emailBox.Text = content;
             savedToggle.IsChecked = sent == "sent";
             savedToggle.Content = savedToggle.IsChecked.Value ? "sent (Ctrl + s)" : "send (Ctrl + s)";
+            linkBox.Text = link;
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -148,7 +148,7 @@ Amadeusz & Bianca
         private void copyData()
         {
             focusedElement++;
-            if (focusedElement == 3)
+            if (focusedElement == 4)
             {
                 next();
                 focusedElement = 0;
@@ -170,6 +170,11 @@ Amadeusz & Bianca
                     emailBox.Focus();
                     emailBox.SelectAll();
                     Clipboard.SetText(emailBox.Text);
+                    break;
+                case 3:
+                    linkBox.Focus();
+                    linkBox.SelectAll();
+                    Clipboard.SetText(linkBox.Text);
                     break;
                 default:
                     break;

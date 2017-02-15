@@ -18,6 +18,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="1*" />
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="locationBox" Grid.Row="0" Text="C:\Users\ama\OneDrive\current\invitations.csv"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -29,5 +30,6 @@
         <TextBox x:Name="addressBox" Grid.Row="2" />
         <TextBox x:Name="subjectBox" Grid.Row="3" />
         <TextBox x:Name="emailBox" Grid.Row="4" />
+        <TextBox x:Name="linkBox" Grid.Row="6" />
     </Grid>
 </Window>
