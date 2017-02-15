@@ -30,11 +30,13 @@ namespace emailApp
         int index = 0;
         const string raw = @"Dear {0},
  
-We're getting married on April 22nd in Vancouver and we'd love for you to join us!
-The invitation will come next week.
+We are excited to invite you to our wedding on April 22nd! 
+Your invitation and RSVP can be found here. 
+Please respond by March 19th.
  
-We're looking forward to seeing you!
-  Amadeusz & Bianca";
+Thank you,
+  Amadeusz & Bianca
+{1}";
 
         private void LoadClick(object sender, RoutedEventArgs e)
         {
@@ -98,13 +100,24 @@ We're looking forward to seeing you!
             //var ln2 = guest[3].Trim();
             var e1 = guest[0].Trim();
             var e2 = guest[1].Trim();
+            var code = guest[3].Trim();
             var sent = guest[12].Trim();
 
             var name = $"{fn1}";
             if (!String.IsNullOrWhiteSpace(fn2))
                 name += $" and {fn2}";
 
-            var content = String.Format(raw, name);
+            string link = @"http://amadeusw.com/wedding/rsvp/";
+            if (String.IsNullOrWhiteSpace(fn2))
+            {
+                link += $@"?name={fn1}&magic={code}";
+            }
+            else
+            {
+                link += $@"?name={fn1}&name2={fn2}&magic={code}";
+            }
+
+            var content = String.Format(raw, name, link);
 
             var email = e1;
             if (!String.IsNullOrWhiteSpace(e2))

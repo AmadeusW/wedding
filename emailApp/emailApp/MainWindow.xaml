@@ -19,7 +19,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="locationBox" Grid.Row="0" Text="C:\Users\ama\OneDrive\current\guests.csv"/>
+        <TextBox x:Name="locationBox" Grid.Row="0" Text="C:\Users\ama\OneDrive\current\invitations.csv"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Content="Load" Click="LoadClick" />
             <Button Content="Previous" Click="PreviousClick" />
