@@ -59,7 +59,7 @@ function respond(what, answer) {
   console.log("> " + what + " := " + answer)
   Responses[what] = answer;
   clearTimeout($.data(document.body, 'timer'));
-  updateButtons(true);
+  updateButtons();
   sendResponse();
 }
 function updateText() {
@@ -86,12 +86,12 @@ function sendResponse() {
     url: "https://amadeusw-wedding.azurewebsites.net/api/Reply?code=HrPgqOkY5Z31RLUjsOz8jqmR2MdYSCxgmWB0WPERNXUWv8Jt1B2ecw==",
     data: data,
     success: function( result ) {
-      updateButtons(false);
+      updateButtons();
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
       console.error(errorThrown);
-      updateButtons(true);
+      updateButtons();
       $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
     }
   });
@@ -110,54 +110,52 @@ function handleStatus (result) {
   Responses['rsvp'] = result.response;
   Responses['menu1'] = result.menu1;
   Responses['menu2'] = result.menu2;
-  updateButtons(false);
+  updateButtons();
 }
 
-function updateButtons(fromUI) {
+function updateButtons() {
   console.log("Buttons: " + Responses);
-  var className = fromUI === true ? "selected" : "selected sent"
-  console.log("Update buttons, with class " + className + " because of " + fromUI)
   
-  $("#rsvp-yes").removeClass("selected sent");
-  $("#rsvp-one").removeClass("selected sent");
-  $("#rsvp-no").removeClass("selected sent");
-  $("#entree-halibut").removeClass("selected sent");
-  $("#entree-lamb").removeClass("selected sent");
-  $("#entree-vege").removeClass("selected sent");
-  $("#entree2-halibut").removeClass("selected sent");
-  $("#entree2-lamb").removeClass("selected sent");
-  $("#entree2-vege").removeClass("selected sent");
+  $("#rsvp-yes").removeClass("selected");
+  $("#rsvp-one").removeClass("selected");
+  $("#rsvp-no").removeClass("selected");
+  $("#entree-halibut").removeClass("selected");
+  $("#entree-lamb").removeClass("selected");
+  $("#entree-vege").removeClass("selected");
+  $("#entree2-halibut").removeClass("selected");
+  $("#entree2-lamb").removeClass("selected");
+  $("#entree2-vege").removeClass("selected");
   switch (Responses['rsvp']) {
     case "yes":
-      $("#rsvp-yes").addClass(className);
+      $("#rsvp-yes").addClass("selected");
       break;
     case "one":
-      $("#rsvp-one").addClass(className);
+      $("#rsvp-one").addClass("selected");
       break;
     case "no":
-      $("#rsvp-no").addClass(className);
+      $("#rsvp-no").addClass("selected");
       break;
   }
   switch (Responses['menu1']) {
     case "halibut":
-      $("#entree-halibut").addClass(className);
+      $("#entree-halibut").addClass("selected");
       break;
     case "lamb":
-      $("#entree-lamb").addClass(className);
+      $("#entree-lamb").addClass("selected");
       break;
     case "vege":
-      $("#entree-vege").addClass(className);
+      $("#entree-vege").addClass("selected");
       break;
   }
   switch (Responses['menu2']) {
     case "halibut":
-      $("#entree2-halibut").addClass(className);
+      $("#entree2-halibut").addClass("selected");
       break;
     case "lamb":
-      $("#entree2-lamb").addClass(className);
+      $("#entree2-lamb").addClass("selected");
       break;
     case "vege":
-      $("#entree2-vege").addClass(className);
+      $("#entree2-vege").addClass("selected");
       break;
   }
   if (Name2 !== "") {
