@@ -1,0 +1,23 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "item"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "$return"
+    },
+    {
+      "name": "weddingTable",
+      "type": "table",
+      "tableName": "wedweb",
+      "connection": "amadeuswstorage_STORAGE",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

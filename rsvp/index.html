@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Amadeusz &amp; Bianca are GETTING MARRIED!</title>
+    <link rel="stylesheet" href="style.css">
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Slabo+27px" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.png">
+  </head>
+  <body>
+    <h1>Amadeusz &amp; Bianca</h1>
+    <section id="rsvp">
+        <h2>Dear <span id="rsvp-name">script kiddie</span>,</h2>
+        <h4>we would like to invite you to our wedding celebration!</h4>
+        <h3>RSVP</h3>
+        <div class="rsvpbuttons">
+            <button id="rsvp-yes">Yes</button>
+            <button id="rsvp-one">Just One</button>
+            <button id="rsvp-no">No</button>
+        </div>
+
+        <div id="food1">
+            <p id="foodprompt1">Pick your entrée:</p>
+            <div class="foodbuttons">
+                <button id="entree-halibut">Pan-Roasted Pacific Halibut</button>
+                <button id="entree-lamb">Pan-Seared Spring Rack of Lamb</button>
+                <button id="entree-vege">Spinach and Ricotta Cannelloni</button>
+            </div>
+        </div>
+
+        <div id="food2">
+            <p id="foodprompt2">Pick your entrée:</p>
+            <div class="foodbuttons">
+                <button id="entree2-halibut">Pan-Roasted Pacific Halibut</button>
+                <button id="entree2-lamb">Pan-Seared Spring Rack of Lamb</button>
+                <button id="entree2-vege">Spinach and Ricotta Cannelloni</button>
+            </div>
+        </div>
+
+        <p>Request songs for the dance party:</p>
+        <input type="text" id="rsvp-music"> </input>
+
+        <p>Do you have food considerations or any other comments?</p>
+        <input type="text" id="rsvp-comment"> </input>
+
+        <p id="rsvp-status"></p>
+
+        <!--
+        <h3>NAME and NAME, are you coming?</h3>
+        <div class="rsvpbuttons">
+            <button>Yes</button>
+            <button>Only one of us</button>
+            <button>No</button>
+        </div>
+        -->
+    </section>
+
+    <section id="map">
+        <h3>Date, Time and Location</h3>
+        <h2>April 22<sup>nd</sup> at 5:30pm</h2>
+        <p>
+            Our wedding and reception will be held at the
+            <a class="maplink" href="https://www.google.com/maps/place/Cecil+Green+Park+House/@49.2633057,-123.2411581,13z/data=!4m5!3m4!1s0x548672b1a4606653:0xba00269da2e1e9f0!8m2!3d49.2713887!4d-123.2577044">Cecil Green Park House <br /> on the University of British Columbia campus</a>.
+        </p>
+        <p>
+            The venue is easily accessible by transit, bicycle, taxi and car. <br />
+            There is metered parking steps from the venue and daily parking garages on campus.
+        </p>
+        <div class="maparea">
+            <a href="https://www.google.com/maps/place/Cecil+Green+Park+House/@49.2633057,-123.2411581,13z/data=!4m5!3m4!1s0x548672b1a4606653:0xba00269da2e1e9f0!8m2!3d49.2713887!4d-123.2577044">
+                <img src="map.png" class="photo" />
+            </a>
+        </div>
+        <h3>Accommodation</h3>
+        <p>
+            We have reserved some rooms at a discounted price for out of town guests at the <a href="https://www.google.com/maps/place/Best+Western+Plus+Sands/@49.286872,-123.143092,17z/data=!3m1!4b1!4m5!3m4!1s0x5486722f4ab0ac8f:0x1a139184bd0082d1!8m2!3d49.286872!4d-123.140898">Best Western Plus Sands</a>. 
+            <span id="hotelpublic" class="visible">Open this page using link from your invitation email to see the discount link. Make sure to book your stay by February 28th!</span>
+            <span id="hotelprivate">To get the discount, clear your cookies, then <a id="hotelcode" href="">click here</a> to book your stay by February 28th.</span>
+        </p>
+    </section>
+
+    <section id="schedule">
+        <h3>Brief Schedule</h3>
+        <h4>5:30</h4>
+        <p>Guests arrive</p>
+        <h4>6:00</h4>
+        <p>Ceremony</p>
+        <h4>6:30</h4>
+        <p>Drinks and Photos</p>
+        <h4>7:30</h4>
+        <p>Dinner</p>
+        <h4>9:30 - 1:00</h4>
+        <p>Dancing</p>
+    </section>
+
+    <section id="photos">
+        <h3>Photography</h3>
+        <p>Come by later and we will share shots from our wedding.</p>
+        <div class="placeholder">
+            <img src="picture.jpg" class="photo" />
+        </div>
+    </section>
+
+  </body>
+    <script src="scripts.js"></script>
+</html>
