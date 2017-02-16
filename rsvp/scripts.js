@@ -114,6 +114,7 @@ function handleStatus (result) {
   Responses['menu1'] = result.menu1;
   Responses['menu2'] = result.menu2;
   updateButtons();
+  $("#rsvp-status").html( "" );
 }
 
 function updateButtons() {
