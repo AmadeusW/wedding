@@ -89,6 +89,7 @@ function sendResponse() {
     data: data,
     success: function( result ) {
       updateButtons();
+      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
     },
     error: function(jqHXR, errorStatus, errorThrown) {
       console.error(jqHXR);
@@ -159,19 +160,6 @@ function updateButtons() {
     case "vege":
       $("#entree2-vege").addClass("selected");
       break;
-  }
-  if (Name2 !== "") {
-    if (Responses['rsvp'] !== '' && Responses['food1'] !== '' && Responses['food2'] !== '') {
-      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
-    } else {
-      $("#rsvp-status").html( "Waiting for your response..." );
-    }
-  } else {
-    if (Responses['rsvp'] !== '' && Responses['food1'] !== '') {
-      $("#rsvp-status").html( "Your response has been saved. Thanks!" );
-    } else {
-      $("#rsvp-status").html( "Waiting for your response..." );
-    }
   }
 }
 
