@@ -89,6 +89,19 @@ p {
     cursor: pointer;
 }
 
+#send-button {
+    flex-grow: 1;
+    width: 33%;
+    min-height: 3em;
+    padding: 0.2em;
+    height: auto;
+    font-family: 'Slabo 27px', serif;
+    font-size: 1em;
+    background-color: #fefbfa;
+    color: #666;
+    cursor: pointer;
+}
+
 .rsvpbuttons button.selected, .foodbuttons button.selected {
     background-color: #8c7;
     color: #000;

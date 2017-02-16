@@ -20,6 +20,8 @@ function go() {
   $("#entree2-lamb").on("click", function() { respond("menu2","lamb") });
   $("#entree2-vege" ).on("click", function() { respond("menu2","vege") });
 
+  $("#send-button" ).on("click", function() { sendResponse() });
+
   $('#rsvp-music').on("input", updateText);
   $('#rsvp-comment').on("input", updateText);
   $("#rsvp-name").html(Name);
@@ -58,15 +60,15 @@ function go() {
 function respond(what, answer) {
   console.log("> " + what + " := " + answer)
   Responses[what] = answer;
-  clearTimeout($.data(document.body, 'timer'));
+  //clearTimeout($.data(document.body, 'timer'));
   updateButtons();
-  sendResponse();
+  //sendResponse();
 }
 function updateText() {
-  clearTimeout($.data(document.body, 'timer'));
-  $( "#rsvp-status" ).html( "Recording your response... ");
-  var wait = setTimeout(sendResponse, 1000);
-  $.data(document.body, 'timer', wait);
+  //clearTimeout($.data(document.body, 'timer'));
+  //$( "#rsvp-status" ).html( "Recording your response... ");
+  //var wait = setTimeout(sendResponse, 1000);
+  //$.data(document.body, 'timer', wait);
 }
 
 function sendResponse() {
@@ -92,7 +94,7 @@ function sendResponse() {
       console.error(jqHXR);
       console.error(errorThrown);
       updateButtons();
-      $( "#rsvp-status" ).html( "We're sorry, there might have been an error. Please make your selection in a few minutes. ");
+      $( "#rsvp-status" ).html( "We're sorry, there might have been an error. Please make your selection in a couple minutes. ");
     }
   });
 }
