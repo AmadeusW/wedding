@@ -92,7 +92,7 @@ function sendResponse() {
       console.error(jqHXR);
       console.error(errorThrown);
       updateButtons();
-      $( "#rsvp-status" ).html( "We're sorry, there was an error. " + errorStatus );
+      $( "#rsvp-status" ).html( "We're sorry, there might have been an error. Please make your selection in a few minutes. ");
     }
   });
 }
